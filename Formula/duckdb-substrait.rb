@@ -2,7 +2,7 @@ class DuckdbSubstrait < Formula
   desc "Embeddable SQL OLAP Database Management System"
   homepage "https://www.duckdb.org"
   url "https://github.com/drin/duckdb-substrait.git",
-      tag:      "v0.10.0",
+      tag:      "v0.10.1",
       revision: "772c698943f2a41f3e0a2a99cbb5d7187a6abaa8"
   license "MIT"
 
