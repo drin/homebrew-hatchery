@@ -3,7 +3,7 @@ class DuckdbSubstrait < Formula
   homepage "https://www.duckdb.org"
   url "https://github.com/drin/duckdb-substrait.git",
       tag:      "v0.10.1",
-      revision: "772c698943f2a41f3e0a2a99cbb5d7187a6abaa8"
+      revision: "db213416115a757f9d929efae75d6988bdeaf166"
   license "MIT"
 
   # bottle do
