@@ -24,7 +24,7 @@ class DuckdbSubstrait < Formula
     system "make"
 
     cd "duckdb/build/release"
-    system "make", "install"
+    system "sudo", "make", "install"
 
     bin.install "duckdb"
     # The cli tool was renamed (0.1.8 -> 0.1.9)
