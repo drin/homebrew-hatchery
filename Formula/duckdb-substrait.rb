@@ -6,15 +6,15 @@ class DuckdbSubstrait < Formula
       revision: "db213416115a757f9d929efae75d6988bdeaf166"
   license "MIT"
 
-  bottle do
-    sha256 cellar: :any,                 arm64_sonoma:   "fdcc4e161ffd32a58fa4b501bcb48979bd6dd17f4e658d7fe0bbe0253ab5dca6"
+  # bottle do
+  #   sha256 cellar: :any,                 arm64_sonoma:   "fdcc4e161ffd32a58fa4b501bcb48979bd6dd17f4e658d7fe0bbe0253ab5dca6"
   #   sha256 cellar: :any,                 arm64_ventura:  "144c60147341b4c5d84226ab7946f10b9b0047eca6a61a35eedb1d6a2da94179"
   #   sha256 cellar: :any,                 arm64_monterey: "b2b0a23fba24c6f2a66ee6ff117c664ef006fb650026961ae01043b2984945a6"
   #   sha256 cellar: :any,                 sonoma:         "efd30f76771d15bc94f654b6c338e8c302dd8287b7c531bc376087267f96811a"
   #   sha256 cellar: :any,                 ventura:        "150dfcfc6ebdeb54b0036538e181db0c113149a09c598536c1679c26ca12cb51"
   #   sha256 cellar: :any,                 monterey:       "6da7e844ceeaceb5deb61d2de2bf9b6b16fd688f1d7d53856089abf14d6a2ebd"
   #   sha256 cellar: :any_skip_relocation, x86_64_linux:   "eeafe8bd37364ecaae03afe78fab87433697263046c278f84d506cabc4da639e"
-  end
+  # end
 
   depends_on      "cmake"  => :build
   uses_from_macos "python" => :build
