@@ -1,15 +1,16 @@
 class ApacheArrowSubstrait < Formula
-  desc "Columnar in-memory analytics layer designed to accelerate big data"
+  desc     "Columnar in-memory analytics layer designed to accelerate big data"
   homepage "https://arrow.apache.org/"
-  url "https://dlcdn.apache.org/arrow/arrow-15.0.1/apache-arrow-15.0.1.tar.gz"
-  mirror "https://archive.apache.org/dist/arrow/arrow-15.0.1/apache-arrow-15.0.1.tar.gz"
-  sha256 "55db63ed9fd6917b7abfe5d4186c9f532cbe48aa53f4040d57e7c29ad70bcefa"
-  license "Apache-2.0"
-  head "https://github.com/apache/arrow.git", branch: "main"
+  url      "https://dlcdn.apache.org/arrow/arrow-15.0.1/apache-arrow-15.0.1.tar.gz"
+  mirror   "https://archive.apache.org/dist/arrow/arrow-15.0.1/apache-arrow-15.0.1.tar.gz"
+  sha256   "55db63ed9fd6917b7abfe5d4186c9f532cbe48aa53f4040d57e7c29ad70bcefa"
+  license  "Apache-2.0"
+  head     "https://github.com/apache/arrow.git", branch: "main"
 
-  depends_on "boost" => :build
-  depends_on "cmake" => :build
-  depends_on "ninja" => :build
+  depends_on "boost"       => :build
+  depends_on "cmake"       => :build
+  depends_on "ninja"       => :build
+  depends_on "protobuf"    => :build
   depends_on "aws-sdk-cpp"
   depends_on "brotli"
   depends_on "bzip2"
@@ -18,13 +19,13 @@ class ApacheArrowSubstrait < Formula
   depends_on "llvm"
   depends_on "lz4"
   depends_on "openssl@3"
-  depends_on "protobuf"
   depends_on "rapidjson"
   depends_on "re2"
   depends_on "snappy"
   depends_on "thrift"
   depends_on "utf8proc"
   depends_on "zstd"
+
   uses_from_macos "python" => :build
 
   fails_with gcc: "5"
