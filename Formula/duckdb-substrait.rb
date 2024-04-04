@@ -6,6 +6,7 @@ class DuckdbSubstrait < Formula
       revision: "db213416115a757f9d929efae75d6988bdeaf166"
   license "MIT"
 
+  # TODO: how to leverage this for shorter build times
   # bottle do
   #   sha256 cellar: :any,                 arm64_sonoma:   "fdcc4e161ffd32a58fa4b501bcb48979bd6dd17f4e658d7fe0bbe0253ab5dca6"
   #   sha256 cellar: :any,                 arm64_ventura:  "144c60147341b4c5d84226ab7946f10b9b0047eca6a61a35eedb1d6a2da94179"
@@ -17,21 +18,23 @@ class DuckdbSubstrait < Formula
   # end
 
   depends_on      "cmake"  => :build
+  depends_on      "ninja"  => :build
   uses_from_macos "python" => :build
 
   conflicts_with  "duckdb", because: "duckdb-substrait independently installs duckdb"
 
   def install
-    cmake_args = [
-      '-DCMAKE_BUILD_TYPE=Release',
-      '-DEXTENSION_STATIC_BUILD=1',
-      '-DBUILD_EXTENSIONS=tpch;json',
-      '-DDUCKDB_EXTENSION_NAMES=substrait',
-      '-DDUCKDB_EXTENSION_SUBSTRAIT_SHOULD_LINK=1',
-      '-DDUCKDB_EXTENSION_SUBSTRAIT_LOAD_TESTS=1',
-      "-DDUCKDB_EXTENSION_SUBSTRAIT_PATH='#{buildpath}'",
-      "-DDUCKDB_EXTENSION_SUBSTRAIT_TEST_PATH='#{buildpath}/test'",
-      "-DDUCKDB_EXTENSION_SUBSTRAIT_INCLUDE_PATH='#{buildpath}/src/include'",
+    cmake_args = %W[
+      -DCMAKE_BUILD_TYPE=Release
+      -DEXTENSION_STATIC_BUILD=1
+      -DBUILD_EXTENSIONS=tpch;json
+      -DDUCKDB_EXTENSION_NAMES=substrait
+      -DDUCKDB_EXTENSION_SUBSTRAIT_SHOULD_LINK=1
+      -DDUCKDB_EXTENSION_SUBSTRAIT_LOAD_TESTS=1
+      -DDUCKDB_EXTENSION_SUBSTRAIT_PATH=#{buildpath}
+      -DDUCKDB_EXTENSION_SUBSTRAIT_TEST_PATH=#{buildpath}/test
+      -DDUCKDB_EXTENSION_SUBSTRAIT_INCLUDE_PATH=#{buildpath}/src/include
+      -GNinja
     ]
 
     # Get all submodules
@@ -44,7 +47,7 @@ class DuckdbSubstrait < Formula
 
     # The DuckDB Makefile assume `pwd` is the duckdb dir, we try to not
     # make any assumptions
-    system 'cmake', '-S', 'duckdb', '-B', build_dpath, *cmake_args, *std_cmake_args
+    system 'cmake', '-S', src_dpath, '-B', build_dpath, *cmake_args, *std_cmake_args
     system 'cmake',   '--build', build_dpath, '--config', 'Release'
     system 'cmake', '--install', build_dpath
   end
