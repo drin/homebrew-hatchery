@@ -6,11 +6,13 @@ class SkytetherMohair < Formula
       tag:      "v0.1.0",
       revision: "8b9b943f389c879614c1a09062fbaa67d43f0419"
 
-  depends_on      "cmake"            => :build
-  depends_on      "ninja"            => :build
-  depends_on      "git-lfs"          => [:build, :test]
-  uses_from_macos "python"           => :build
-  depends_on      "duckdb-substrait"
+  depends_on "git-lfs"                => [:build, :test]
+  depends_on "cmake"                  => :build
+  depends_on "ninja"                  => :build
+  depends_on "apache-arrow-substrait" => :build
+  depends_on "duckdb-substrait"       => :build
+
+  uses_from_macos "python"            => :build
 
   def install
     build_dirpath = 'build-dir-release'
