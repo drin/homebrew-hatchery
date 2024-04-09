@@ -4,7 +4,7 @@ class SkytetherMohair < Formula
   homepage "https://research.aldrinmontana.com/"
   url      "https://github.com/drin/mohair.git",
       tag:      "v0.1.0",
-      revision: "8b9b943f389c879614c1a09062fbaa67d43f0419"
+      revision: "bfe725fe8abc04d8d50971fef72522267493bdc9"
 
   depends_on "git-lfs"                => [:build, :test]
   depends_on "cmake"                  => :build
