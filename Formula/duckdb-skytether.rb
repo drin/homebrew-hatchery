@@ -2,7 +2,8 @@ class DuckdbSkytether < Formula
   desc "Embeddable SQL OLAP Database Management System"
   homepage "https://www.duckdb.org"
   url "https://github.com/drin/duckdb-skytether.git",
-      branch: "feat-skytether-engine"
+    tag: "v0.1.0",
+    commit: "51af1dae22f930fc5312b03229a9b93395281b8e"
   license "MIT"
 
   depends_on      "cmake"  => :build
