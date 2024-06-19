@@ -1,11 +1,11 @@
 class ApacheArrowSubstrait < Formula
   desc     "Columnar in-memory analytics layer designed to accelerate big data"
   homepage "https://arrow.apache.org/"
-  url      "https://dlcdn.apache.org/arrow/arrow-15.0.1/apache-arrow-15.0.1.tar.gz"
-  mirror   "https://archive.apache.org/dist/arrow/arrow-15.0.1/apache-arrow-15.0.1.tar.gz"
-  sha256   "55db63ed9fd6917b7abfe5d4186c9f532cbe48aa53f4040d57e7c29ad70bcefa"
+  url      "https://dlcdn.apache.org/arrow/arrow-16.1.0/apache-arrow-16.1.0.tar.gz"
+  mirror   "https://archive.apache.org/dist/arrow/arrow-16.1.0/apache-arrow-16.1.0.tar.gz"
+  sha256   "c9e60c7e87e59383d21b20dc874b17153729ee153264af6d21654b7dff2c60d7"
   license  "Apache-2.0"
-  head     "https://github.com/apache/arrow.git", branch: "main"
+  head     "https://github.com/apache/arrow.git", branch: "apache-arrow-16.1.0"
 
   depends_on "boost"       => :build
   depends_on "cmake"       => :build
