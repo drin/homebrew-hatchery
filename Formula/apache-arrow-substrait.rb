@@ -11,6 +11,7 @@ class ApacheArrowSubstrait < Formula
   depends_on "cmake"       => :build
   depends_on "ninja"       => :build
   depends_on "protobuf"    => :build
+  depends_on "abseil"
   depends_on "aws-sdk-cpp"
   depends_on "brotli"
   depends_on "bzip2"
@@ -27,6 +28,7 @@ class ApacheArrowSubstrait < Formula
   depends_on "zstd"
 
   uses_from_macos "python" => :build
+  uses_from_macos "zlib"
 
   fails_with gcc: "5"
 
@@ -37,6 +39,7 @@ class ApacheArrowSubstrait < Formula
 
     args = %W[
       -DCMAKE_INSTALL_RPATH=#{rpath}
+      -DLLVM_ROOT=#{llvm.opt_prefix}
       -DARROW_ACERO=ON
       -DARROW_COMPUTE=ON
       -DARROW_CSV=ON
@@ -48,7 +51,7 @@ class ApacheArrowSubstrait < Formula
       -DARROW_GCS=ON
       -DARROW_HDFS=ON
       -DARROW_JSON=ON
-      -DARROW_ORC=ON
+      -DARROW_ORC=OFF
       -DARROW_PARQUET=ON
       -DARROW_PROTOBUF_USE_SHARED=ON
       -DARROW_S3=ON
