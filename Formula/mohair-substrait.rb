@@ -6,6 +6,7 @@ class MohairSubstrait < Formula
     commit: "8057238d22a0ca980d5a040f6c49c02d856f1b1e"
   license "Apache-2.0"
 
+  depends_on "abseil"   => :build
   depends_on "protobuf" => :build
   depends_on "meson"    => :build
   depends_on "ninja"    => :build
