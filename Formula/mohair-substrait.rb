@@ -8,7 +8,9 @@ class MohairSubstrait < Formula
 
   depends_on "abseil"   => :build
   depends_on "protobuf" => :build
+
   depends_on "meson"    => :build
+  depends_on "cmake"    => :build
   depends_on "ninja"    => :build
 
   def install
