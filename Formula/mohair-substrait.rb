@@ -2,8 +2,8 @@ class MohairSubstrait < Formula
   desc     "Shared library to interface with Substrait and Mohair protocols"
   homepage "https://github.com/drin/mohair-substrait.git"
   url      "https://github.com/drin/mohair-substrait.git",
-    tag: "v0.1.2",
-    commit: "7c210c96b1d19316d6ad23c6be4a0eb1856014b3"
+    tag: "v0.1.3",
+    commit: "b21508bb156fae5800775342c2fcdf162621fe59"
   license "Apache-2.0"
 
   depends_on "abseil"   => :build
