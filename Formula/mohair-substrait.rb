@@ -3,7 +3,7 @@ class MohairSubstrait < Formula
   homepage "https://github.com/drin/mohair-substrait.git"
   url      "https://github.com/drin/mohair-substrait.git",
     tag: "v0.1.0",
-    commit: "8057238d22a0ca980d5a040f6c49c02d856f1b1e"
+    commit: "28175d11875cdb99faeae60aed30d3bbf112e889"
   license "Apache-2.0"
 
   depends_on "abseil"   => :build
