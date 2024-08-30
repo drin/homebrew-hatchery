@@ -6,20 +6,15 @@ class ProtobufStatic < Formula
   license "BSD-3-Clause"
   revision 1
 
-  # livecheck do
-  #   url :stable
-  #   strategy :github_latest
-  # end
+  livecheck do
+    url :stable
+    strategy :github_latest
+  end
 
-  # bottle do
-  #   sha256 cellar: :any,                 arm64_sonoma:   "5b1a2146d54650db79fa06d4f412d27234b6c2cefb2a9732e082e72a962d7321"
-  #   sha256 cellar: :any,                 arm64_ventura:  "75e04018736e21d729817cc9b008a8088548566d959f675b9c28939a05da5868"
-  #   sha256 cellar: :any,                 arm64_monterey: "a823df91e5e83440abf17d57fea72f0c234e4d6e04ac2b0de9303c2477f07625"
-  #   sha256 cellar: :any,                 sonoma:         "d4d402e7c17fd7f5c383058c60ab564647532ad3b26525b9f7a8f69cb0f0eb16"
-  #   sha256 cellar: :any,                 ventura:        "3597daa5939a38c4b68df3067762f9227952e1a456f3e17a5764c89b825a767a"
-  #   sha256 cellar: :any,                 monterey:       "79d9cbad2a7a907e73605a803bb6cb88535ec50cf3a9a1e8b4547f6cccaa437c"
-  #   sha256 cellar: :any_skip_relocation, x86_64_linux:   "9b4d12f9f02438f92cd3eb4e44b914fc1ef54737285f324d5e4f89307b6dcff5"
-  # end
+  bottle do
+    rebuild 1
+    sha256 cellar: :any, arm64_sonoma: "bb5aac9d206518d62e827a8b9244aebd364d877de465eaf903943efe182a94b6"
+  end
 
   depends_on "cmake" => :build
   depends_on "abseil"
@@ -31,7 +26,7 @@ class ProtobufStatic < Formula
     depends_on "googletest" => :build
   end
 
-  conflicts_with  "protobuf",
+  conflicts_with "protobuf",
     because: "protobuf-static installs protobuf as a static library and is otherwise the same as protobuf"
 
   def install
