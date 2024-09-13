@@ -1,8 +1,8 @@
 class ProtobufStatic < Formula
   desc "Protocol buffers (Google's data interchange format)"
   homepage "https://protobuf.dev/"
-  url "https://github.com/protocolbuffers/protobuf/releases/download/v27.3/protobuf-27.3.tar.gz"
-  sha256 "1535151efbc7893f38b0578e83cac584f2819974f065698976989ec71c1af84a"
+  url "https://github.com/protocolbuffers/protobuf/releases/download/v28.1/protobuf-28.1.tar.gz"
+  sha256 "3b8bf6e96499a744bd014c60b58f797715a758093abf859f1d902194b8e1f8c9"
   license "BSD-3-Clause"
   revision 1
 
@@ -11,13 +11,13 @@ class ProtobufStatic < Formula
     strategy :github_latest
   end
 
-  bottle do
-    rebuild 1
-    sha256 cellar: :any, arm64_sonoma: "bb5aac9d206518d62e827a8b9244aebd364d877de465eaf903943efe182a94b6"
-  end
+  # bottle do
+  #   rebuild 1
+  #   sha256 cellar: :any, arm64_sonoma: "bb5aac9d206518d62e827a8b9244aebd364d877de465eaf903943efe182a94b6"
+  # end
 
   depends_on "cmake" => :build
-  depends_on "abseil"
+  depends_on "abseil-static"
   uses_from_macos "zlib"
 
   on_macos do
