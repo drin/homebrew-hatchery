@@ -23,7 +23,7 @@ class MohairSubstrait < Formula
 
     # Build and install the code
     system 'meson', 'setup'    , build_dpath
-    system 'meson', 'configure', *std_meson_args, build_dpath
+    system 'meson', 'configure', *std_meson_args, '-D', 'default_library=both', build_dpath
 
     system 'meson', 'compile', '-C', build_dpath
     system 'meson', 'install', '-C', build_dpath
