@@ -12,11 +12,11 @@ class ApacheArrowSubstrait < Formula
   depends_on "ninja"           => :build
   depends_on "protobuf-static" => :build
   depends_on "abseil-static"
+  depends_on "grpc-static"
   depends_on "aws-sdk-cpp"
   depends_on "brotli"
   depends_on "bzip2"
   depends_on "glog"
-  depends_on "grpc"
   depends_on "llvm"
   depends_on "lz4"
   depends_on "openssl@3"
