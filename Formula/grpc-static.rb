@@ -42,7 +42,7 @@ class GrpcStatic < Formula
   depends_on "cmake" => :build
   depends_on "libtool" => :build
   depends_on "pkg-config" => :test
-  depends_on "abseil"
+  depends_on "abseil-static"
   depends_on "c-ares"
   depends_on "openssl@3"
   depends_on "protobuf-static"
@@ -105,7 +105,7 @@ class GrpcStatic < Formula
     EOS
     ENV.prepend_path "PKG_CONFIG_PATH", Formula["openssl@3"].opt_lib/"pkgconfig"
     pkg_config_flags = shell_output("pkg-config --cflags --libs libcares protobuf re2 grpc++").chomp.split
-    system ENV.cc, "test.cpp", "-L#{Formula["abseil"].opt_lib}", *pkg_config_flags, "-o", "test"
+    system ENV.cc, "test.cpp", "-L#{Formula["abseil-static"].opt_lib}", *pkg_config_flags, "-o", "test"
     system "./test"
 
     output = shell_output("#{bin}/grpc_cli ls localhost:#{free_port} 2>&1", 1)
