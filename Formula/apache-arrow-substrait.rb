@@ -48,7 +48,7 @@ class ApacheArrowSubstrait < Formula
       -DARROW_FILESYSTEM=ON
       -DARROW_FLIGHT=ON
       -DARROW_FLIGHT_SQL=ON
-      -DARROW_GANDIVA=ON
+      -DARROW_GANDIVA=OFF
       -DARROW_GCS=ON
       -DARROW_HDFS=ON
       -DARROW_JSON=ON
