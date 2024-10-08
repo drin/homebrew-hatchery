@@ -6,11 +6,15 @@ class SkytetherMohair < Formula
     revision: "40bccb6a0ec8004c0ee3b7b4fafe963d62fed4b6"
   license  "Apache-2.0"
 
-  depends_on "meson" => :build
-  depends_on "cmake" => :build
-  depends_on "ninja" => :build
+  depends_on "meson"   => :build
+  depends_on "cmake"   => :build
+  depends_on "ninja"   => :build
 
-  depends_on "mohair-substrait" => :build
+  # depends_on "git"     => :build
+  # depends_on "git-lfs" => :build
+
+  depends_on "mohair-substrait"       => :build
+  depends_on "apache-arrow-substrait" => :build
 
   def install
     build_dpath = 'build-dir'
