@@ -5,6 +5,7 @@ class AbseilStatic < Formula
   sha256 "f50e5ac311a81382da7fa75b97310e4b9006474f9560ac46f54a9967f07d4ae3"
   license "Apache-2.0"
   head "https://github.com/abseil/abseil-cpp.git", branch: "master"
+  revision 1
 
   # bottle do
   #   sha256 cellar: :any,                 arm64_sonoma:   "922c5d7b256fed577b3f7c84ec7a8ce67dddfc7670726e417eaed71bb6878fc6"
@@ -47,6 +48,7 @@ class AbseilStatic < Formula
     system "cmake", "-S", ".", "-B", "build",
                     "-DCMAKE_INSTALL_RPATH=#{rpath}",
                     "-DCMAKE_CXX_STANDARD=17",
+                    "-DCMAKE_POSITION_INDEPENDENT_CODE=ON",
                     "-DBUILD_STATIC_LIBS=ON",
                     "-DABSL_PROPAGATE_CXX_STD=ON",
                     "-DABSL_ENABLE_INSTALL=ON",
