@@ -8,6 +8,7 @@ class DuckdbSkytether < Formula
 
   depends_on      "cmake"            => :build
   depends_on      "ninja"            => :build
+  depends_on      "llvm"             => :build
   depends_on      "mohair-substrait" => :build
 
   uses_from_macos "python" => :build
@@ -21,6 +22,8 @@ class DuckdbSkytether < Formula
   def install
     cmake_args = %W[
       -DCMAKE_BUILD_TYPE=Release
+      -DCMAKE_C_COMPILER=clang
+      -DCMAKE_CXX_COMPILER=clang++
       -DEXTENSION_STATIC_BUILD=1
       -DBUILD_EXTENSIONS=tpch;json
       -DDUCKDB_EXTENSION_NAMES=substrait;arrow
