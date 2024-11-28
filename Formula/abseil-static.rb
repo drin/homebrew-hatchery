@@ -5,7 +5,6 @@ class AbseilStatic < Formula
   sha256 "f50e5ac311a81382da7fa75b97310e4b9006474f9560ac46f54a9967f07d4ae3"
   license "Apache-2.0"
   head "https://github.com/abseil/abseil-cpp.git", branch: "master"
-  revision 1
 
   # bottle do
   #   sha256 cellar: :any,                 arm64_sonoma:   "922c5d7b256fed577b3f7c84ec7a8ce67dddfc7670726e417eaed71bb6878fc6"
