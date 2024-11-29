@@ -6,7 +6,6 @@ class ApacheArrowSubstrait < Formula
   sha256   "abcf1934cd0cdddd33664e9f2d9a251d6c55239d1122ad0ed223b13a583c82a9"
   license  "Apache-2.0"
   head     "https://github.com/apache/arrow.git", branch: "apache-arrow-18.0.0"
-  revision 1
 
   depends_on "boost"           => :build
   depends_on "cmake"           => :build
