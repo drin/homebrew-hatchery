@@ -37,7 +37,7 @@ class ApacheArrowSubstrait < Formula
     # Work around an Xcode 15 linker issue which causes linkage against LLVM's
     # libunwind due to it being present in a library search path.
     formula_llvm = Formula["llvm"]
-    ENV.remove "HOMEBREW_LIBRARY_PATHS", Formula["llvm"].opt_lib if DevelopmentTools.clang_build_version >= 1500
+    ENV.remove "HOMEBREW_LIBRARY_PATHS", formula_llvm.opt_lib if DevelopmentTools.clang_build_version >= 1500
 
     args = %W[
       -DCMAKE_INSTALL_RPATH=#{rpath}
@@ -57,6 +57,7 @@ class ApacheArrowSubstrait < Formula
       -DARROW_PARQUET=ON
       -DARROW_PROTOBUF_USE_SHARED=OFF
       -DARROW_PROTOBUF_BUILD_VERSION=v28.3
+      -DARROW_GRPC_USE_SHARED=OFF
       -DARROW_S3=ON
       -DARROW_SUBSTRAIT=ON
       -DARROW_WITH_BZ2=ON
