@@ -1,26 +1,27 @@
 class ApacheArrowSubstrait < Formula
   desc     "Columnar in-memory analytics layer designed to accelerate big data"
   homepage "https://arrow.apache.org/"
-  url      "https://dlcdn.apache.org/arrow/arrow-18.0.0/apache-arrow-18.0.0.tar.gz"
-  mirror   "https://archive.apache.org/dist/arrow/arrow-18.0.0/apache-arrow-18.0.0.tar.gz"
-  sha256   "abcf1934cd0cdddd33664e9f2d9a251d6c55239d1122ad0ed223b13a583c82a9"
+  url      "https://dlcdn.apache.org/arrow/arrow-19.0.0/apache-arrow-19.0.0.tar.gz"
+  mirror   "https://archive.apache.org/dist/arrow/arrow-19.0.0/apache-arrow-19.0.0.tar.gz"
+  sha256   "f89b93f39954740f7184735ff1e1d3b5be2640396febc872c4955274a011f56b"
   license  "Apache-2.0"
-  head     "https://github.com/apache/arrow.git", branch: "apache-arrow-18.0.0"
+  head     "https://github.com/apache/arrow.git", branch: "apache-arrow-19.0.0"
 
   depends_on "boost"           => :build
   depends_on "cmake"           => :build
   depends_on "ninja"           => :build
+  depends_on "gflags"          => :build
+  depends_on "rapidjson"       => :build
+  depends_on "xsimd"           => :build
+  depends_on "abseil-static"   => :build
   depends_on "protobuf-static" => :build
-  depends_on "abseil-static"
   depends_on "grpc-static"
   depends_on "aws-sdk-cpp"
   depends_on "brotli"
-  depends_on "bzip2"
   depends_on "glog"
   depends_on "llvm"
   depends_on "lz4"
   depends_on "openssl@3"
-  depends_on "rapidjson"
   depends_on "re2"
   depends_on "snappy"
   depends_on "thrift"
@@ -28,19 +29,18 @@ class ApacheArrowSubstrait < Formula
   depends_on "zstd"
 
   uses_from_macos "python" => :build
+  uses_from_macos "bzip2"
   uses_from_macos "zlib"
 
   fails_with gcc: "5"
 
   def install
-    # Work around an Xcode 15 linker issue which causes linkage against LLVM's
-    # libunwind due to it being present in a library search path.
-    formula_llvm = Formula["llvm"]
-    ENV.remove "HOMEBREW_LIBRARY_PATHS", formula_llvm.opt_lib if DevelopmentTools.clang_build_version >= 1500
+    ENV.llvm_clang if OS.linux?
 
     args = %W[
       -DCMAKE_INSTALL_RPATH=#{rpath}
-      -DLLVM_ROOT=#{formula_llvm.opt_prefix}
+      -DLLVM_ROOT=#{Formula["llvm"].opt_prefix}
+      -DARROW_DEPENDENCY_SOURCE=SYSTEM
       -DARROW_ACERO=ON
       -DARROW_COMPUTE=ON
       -DARROW_CSV=ON
@@ -48,14 +48,14 @@ class ApacheArrowSubstrait < Formula
       -DARROW_FILESYSTEM=ON
       -DARROW_FLIGHT=ON
       -DARROW_FLIGHT_SQL=ON
-      -DARROW_GANDIVA=OFF
+      -DARROW_GANDIVA=ON
       -DARROW_GCS=ON
       -DARROW_HDFS=ON
       -DARROW_JSON=ON
       -DARROW_ORC=OFF
       -DARROW_PARQUET=ON
       -DARROW_PROTOBUF_USE_SHARED=OFF
-      -DARROW_PROTOBUF_BUILD_VERSION=v28.3
+      -DARROW_PROTOBUF_BUILD_VERSION=v29.3
       -DARROW_GRPC_USE_SHARED=OFF
       -DARROW_S3=ON
       -DARROW_SUBSTRAIT=ON
@@ -73,19 +73,29 @@ class ApacheArrowSubstrait < Formula
 
     args << "-DARROW_MIMALLOC=ON" unless Hardware::CPU.arm?
 
+    # Reduce overlinking. Can remove on Linux if GCC 11 issue is fixed
+    args << "-DCMAKE_SHARED_LINKER_FLAGS=-Wl,#{OS.mac? ? "-dead_strip_dylibs" : "--as-needed"}"
+
+    # Ref: https://arrow.apache.org/docs/cpp/env_vars.html#envvar-ARROW_USER_SIMD_LEVEL
+    if build.bottle? && Hardware::CPU.intel? && (!OS.mac? || !MacOS.version.requires_sse42?)
+      args << "-DARROW_SIMD_LEVEL=NONE"
+    end
+
     system "cmake", "-S", "cpp", "-B", "build", *args, *std_cmake_args
     system "cmake", "--build", "build"
     system "cmake", "--install", "build"
   end
 
   test do
-    (testpath/"test.cpp").write <<~EOS
+    ENV.method(DevelopmentTools.default_compiler).call if OS.linux?
+
+    (testpath/"test.cpp").write <<~CPP
       #include "arrow/api.h"
       int main(void) {
         arrow::int64();
         return 0;
       }
-    EOS
+    CPP
     system ENV.cxx, "test.cpp", "-std=c++17", "-I#{include}", "-L#{lib}", "-larrow", "-o", "test"
     system "./test"
   end
