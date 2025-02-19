@@ -97,7 +97,7 @@ class GrpcStatic < Formula
     system "cmake",       "--build", cli_build_dir, "--target", "grpc_cli"
 
     bin.install "#{cli_build_dir}/grpc_cli"
-    lib.install (buildpath/"#{cli_build_dir}").glob(shared_library("libgrpc++_test_config", "*"))]
+    lib.install (buildpath/"#{cli_build_dir}").glob(shared_library("libgrpc++_test_config", "*"))
   end
 
   test do
