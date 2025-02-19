@@ -22,14 +22,8 @@ class MohairSubstrait < Formula
     build_dpath = 'build-dir-release'
 
     # Build and install the code
-    sys_options = %W[
-      -DCC=clang
-      -DCXX=clang++
-      -Ddefault_library=both
-    ]
-
-    system 'meson', 'setup'    , build_dpath
-    system 'meson', 'configure', *std_meson_args, *sys_options, build_dpath
+    system 'CC=clang', 'CXX=clang++', 'meson', 'setup'    , build_dpath
+    system 'meson', 'configure', *std_meson_args, '-D', 'default_library=both', build_dpath
 
     system 'meson', 'compile', '-C', build_dpath
     system 'meson', 'install', '-C', build_dpath
