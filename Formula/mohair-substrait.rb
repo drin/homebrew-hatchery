@@ -23,8 +23,8 @@ class MohairSubstrait < Formula
 
     # Build and install the code
     sys_options = %W[
-      -Dcc=clang
-      -Dcxx=clang++
+      -DCC=clang
+      -DCXX=clang++
       -Ddefault_library=both
     ]
 
