@@ -32,7 +32,10 @@ class ApacheArrowSubstrait < Formula
   uses_from_macos "bzip2"
   uses_from_macos "zlib"
 
-  fails_with gcc: "5"
+  fails_with gcc: do
+    version "12"
+    cause "Protobuf 29+ generated code with visibility and deprecated attributes needs GCC 13+"
+  end
 
   def install
     ENV.llvm_clang if OS.linux?
