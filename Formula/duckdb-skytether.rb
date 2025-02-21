@@ -20,6 +20,8 @@ class DuckdbSkytether < Formula
     because: "duckdb-skytether independently includes duckdb-substrait"
 
   def install
+    ENV.llvm_clang if OS.linux?
+
     cmake_args = %W[
       -DCMAKE_BUILD_TYPE=Release
       -DCMAKE_C_COMPILER=clang
