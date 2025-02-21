@@ -14,7 +14,8 @@ class MohairSubstrait < Formula
   depends_on "ninja"    => :build
 
   def install
-    ENV.llvm_clang if OS.linux?
+    # why does homebrew try to find `llvm_clang++` with *only* this formula. WTF!!
+    #ENV.llvm_clang if OS.linux?
 
     # Get all submodules
     system 'git', 'submodule', 'init'
