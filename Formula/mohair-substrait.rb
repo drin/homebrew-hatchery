@@ -2,8 +2,8 @@ class MohairSubstrait < Formula
   desc     "Shared library to interface with Substrait and Mohair protocols"
   homepage "https://github.com/drin/mohair-substrait.git"
   url      "https://github.com/drin/mohair-substrait.git",
-    tag: "v3.1.2",
-    commit: "c5a1925514892535beb94ab46c1aeaa34c97c7c6"
+    tag: "v3.1.3",
+    commit: "02a8ed03b055efc7ffdfd88b7750cc57ba38e828"
   license "Apache-2.0"
 
   depends_on "abseil-static"   => :build
@@ -14,6 +14,8 @@ class MohairSubstrait < Formula
   depends_on "ninja"    => :build
 
   def install
+    ENV.llvm_clang if OS.linux?
+
     # Get all submodules
     system 'git', 'submodule', 'init'
     system 'git', 'submodule', 'update', '--recursive', '--remote'
@@ -22,9 +24,6 @@ class MohairSubstrait < Formula
     build_dpath = 'build-dir-release'
 
     # Build and install the code
-    ENV['CC']  = 'clang'
-    ENV['CXX'] = 'clang++'
-
     system 'meson', 'setup'    , build_dpath
     system 'meson', 'configure', *std_meson_args, '-D', 'default_library=both', build_dpath
 
