@@ -52,7 +52,7 @@ class AbseilStatic < Formula
                     "-DABSL_PROPAGATE_CXX_STD=ON",
                     "-DABSL_ENABLE_INSTALL=ON",
                     *extra_cmake_args, *std_cmake_args
-    system "cmake", "--build", "build"
+    system "cmake",   "--build", "build"
     system "cmake", "--install", "build"
   end
 
