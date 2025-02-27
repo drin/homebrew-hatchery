@@ -2,8 +2,8 @@ class SkytetherMohair < Formula
   desc     "Mohair is the query processing layer of Skytether for cooperative query decomposition"
   homepage "https://research.aldrinmontana.com/"
   url      "https://github.com/drin/mohair.git",
-    tag: "v0.3.0",
-    revision: "40bccb6a0ec8004c0ee3b7b4fafe963d62fed4b6"
+    tag: "v2.2.0",
+    revision: "358e9c1430b8b4c933e6b97a9592be813aa98041"
   license  "Apache-2.0"
 
   depends_on "meson"   => :build
