@@ -2,7 +2,7 @@ class MohairSubstrait < Formula
   desc     "Shared library to interface with Substrait and Mohair protocols"
   homepage "https://github.com/drin/mohair-substrait.git"
   url      "https://github.com/drin/mohair-substrait.git",
-    tag: "dev-v4.2.0",
+    tag: "dev-4.2.0",
     commit: "4932644539ab04a216ab5850bec09277c32ce42d"
   license "Apache-2.0"
 
