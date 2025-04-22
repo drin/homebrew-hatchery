@@ -1,11 +1,19 @@
 class ApacheArrowSubstrait < Formula
   desc     "Columnar in-memory analytics layer designed to accelerate big data"
   homepage "https://arrow.apache.org/"
-  url      "https://dlcdn.apache.org/arrow/arrow-19.0.1/apache-arrow-19.0.1.tar.gz"
-  mirror   "https://archive.apache.org/dist/arrow/arrow-19.0.1/apache-arrow-19.0.1.tar.gz"
-  sha256   "acb76266e8b0c2fbb7eb15d542fbb462a73b3fd1e32b80fad6c2fafd95a51160"
   license  "Apache-2.0"
   head     "https://github.com/apache/arrow.git", branch: "apache-arrow-19.0.1"
+
+  stable do
+    url    "https://www.apache.org/dyn/closer.lua?path=arrow/arrow-19.0.1/apache-arrow-19.0.1.tar.gz"
+    mirror "https://archive.apache.org/dist/arrow/arrow-19.0.1/apache-arrow-19.0.1.tar.gz"
+    sha256 "acb76266e8b0c2fbb7eb15d542fbb462a73b3fd1e32b80fad6c2fafd95a51160"
+
+    patch do
+      url    "https://github.com/apache/arrow/commit/c124bb55d993daca93742ce896869ab3101dccbb.patch?full_index=1"
+      sha256 "249ec9d7bf33136080992cda4d47790d3b00cdf24caa3b0e3f95d4a4bb9fba3e"
+    end
+  end
 
   depends_on "boost"           => :build
   depends_on "cmake"           => :build
@@ -39,6 +47,10 @@ class ApacheArrowSubstrait < Formula
 
   def install
     ENV.llvm_clang if OS.linux?
+
+    # upstream pr ref, https://github.com/apache/arrow/pull/44989
+    odie "Remove CMAKE_POLICY_VERSION_MINIMUM workaround!" if build.stable? && version > "19.0.1"
+    ENV["CMAKE_POLICY_VERSION_MINIMUM"] = "3.5"
 
     args = %W[
       -DCMAKE_INSTALL_RPATH=#{rpath}
